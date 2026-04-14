@@ -40,3 +40,6 @@ blob-report/
 # Local watcher state
 .claude/watch-state.json
 .claude/watch-logs/
+
+# Game repo cache (refresh-games script)
+.game-repos/
