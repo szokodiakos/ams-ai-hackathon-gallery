@@ -23,20 +23,45 @@ export default async function GamePage({
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         href="/"
-        className="mb-6 inline-flex items-center text-sm text-gray-600 hover:text-gray-900"
+        className="mb-6 inline-flex items-center font-mono text-sm transition-colors"
+        style={{ color: "var(--color-accent1)" }}
       >
-        &larr; Back to Gallery
+        &larr; BACK TO GALLERY
       </Link>
-      <h1 className="mb-6 text-3xl font-bold">{game.title}</h1>
-      <p className="mb-6 text-gray-600">{game.description}</p>
+      <h1
+        className="text-glow-1 mb-4 font-pixel text-lg"
+        style={{ color: "var(--color-accent1)" }}
+      >
+        {game.title}
+      </h1>
+      <p className="mb-6 font-mono text-sm" style={{ color: "var(--color-text-dim)" }}>
+        {game.description}
+      </p>
       {game.comingSoon ? (
-        <div className="flex min-h-[600px] items-center justify-center rounded-lg border border-gray-200 bg-gray-50">
+        <div
+          className="flex min-h-[600px] items-center justify-center rounded-lg border-2"
+          style={{
+            borderColor: "var(--color-card-border)",
+            backgroundColor: "var(--color-bg-darker)",
+          }}
+        >
           <div className="text-center">
-            <p className="text-4xl">🎮</p>
-            <p className="mt-4 text-lg font-medium text-gray-500">
-              This game is coming soon!
+            <p
+              className="animate-blink font-pixel text-4xl"
+              style={{ color: "var(--color-accent1)", opacity: 0.4 }}
+            >
+              ?
             </p>
-            <p className="mt-1 text-sm text-gray-400">
+            <p
+              className="mt-6 font-pixel text-xs"
+              style={{ color: "var(--color-accent2)" }}
+            >
+              COMING SOON
+            </p>
+            <p
+              className="mt-2 font-mono text-sm"
+              style={{ color: "var(--color-text-dim)" }}
+            >
               Check back later to play.
             </p>
           </div>

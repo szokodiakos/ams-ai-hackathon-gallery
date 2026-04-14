@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import ThemeProvider from "@/components/ThemeProvider";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,10 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-        <Header />
-        <main>{children}</main>
+    <html lang="en" data-scanlines="true" data-grid-bg="true" data-starfield="false" data-crt-curve="false" data-theme="neon-cyber">
+      <body className="min-h-screen antialiased" style={{ backgroundColor: "var(--color-bg)", color: "var(--color-text)" }}>
+        <ThemeProvider>
+          <Header />
+          <main className="relative z-10">{children}</main>
+          <ThemeSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );

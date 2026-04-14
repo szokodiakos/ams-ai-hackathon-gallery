@@ -47,12 +47,12 @@ describe("GameCard", () => {
 
   it("shows Coming Soon badge when game is coming soon", () => {
     render(<GameCard game={comingSoonGame} />);
-    expect(screen.getByText("Coming Soon")).toBeInTheDocument();
+    expect(screen.getByText("COMING SOON")).toBeInTheDocument();
   });
 
   it("does not show Coming Soon badge for available games", () => {
     render(<GameCard game={mockGame} />);
-    expect(screen.queryByText("Coming Soon")).not.toBeInTheDocument();
+    expect(screen.queryByText("COMING SOON")).not.toBeInTheDocument();
   });
 
   it("renders thumbnail image for available games", () => {
