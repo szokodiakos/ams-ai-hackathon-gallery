@@ -33,3 +33,7 @@ yarn-error.log*
 
 # Testing
 coverage/
+
+# Local watcher state
+.claude/watch-state.json
+.claude/watch-logs/
