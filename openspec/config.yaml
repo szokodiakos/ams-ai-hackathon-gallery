@@ -1,0 +1,27 @@
+schema: spec-driven
+
+context: |
+  This is the AMS AI Hackathon Gallery project.
+  The tech stack is not yet decided — it will be specified through GitHub issues
+  and the OpenSpec workflow.
+
+  The project uses an autonomous GitHub Actions workflow where Claude Code
+  picks up issues, creates specs, implements features, and opens PRs.
+
+  Deployment is handled by Vercel (preview on PRs, production on main).
+
+rules:
+  proposal:
+    - Keep proposals concise and focused on a single concern
+    - Include acceptance criteria
+    - Reference the GitHub issue number
+  specs:
+    - Include edge cases and error conditions
+    - Define what "done" looks like
+  design:
+    - Document technology choices and alternatives considered
+    - Include a section on how this integrates with existing code
+  tasks:
+    - Break into tasks that can each be completed in a single commit
+    - Each task should be independently testable
+    - Order tasks by dependency (foundations first)

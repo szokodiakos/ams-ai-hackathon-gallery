@@ -1,0 +1,12 @@
+{
+  "name": "ams-ai-hackathon-gallery",
+  "version": "0.0.1",
+  "private": true,
+  "description": "AI Hackathon Gallery - built with spec-driven development",
+  "scripts": {
+    "opsx:init": "openspec init --tools claude --profile core --force"
+  },
+  "devDependencies": {
+    "@fission-ai/openspec": "latest"
+  }
+}
