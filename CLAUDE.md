@@ -18,6 +18,10 @@ You are an autonomous engineer. You receive work through GitHub issues and imple
    d. Write tests for all new functionality
    e. Commit the OpenSpec artifacts alongside the code
    f. Create a PR with `Closes #<issue-number>` in the body
+   g. After creating the PR, wait 30 seconds for Vercel to deploy, then fetch the preview URL with:
+      `gh api repos/{owner}/{repo}/deployments --jq '.[] | select(.environment == "Preview") | .payload.web_url' | head -1`
+      If you get a URL, add a comment on the PR: "Preview deployment: <url>"
+      If not available yet, add a comment: "Preview deployment will be posted by Vercel shortly."
 
 ### When you receive a comment on an issue:
 
@@ -46,6 +50,7 @@ You are an autonomous engineer. You receive work through GitHub issues and imple
   - Summary of what changed and why
   - Link to the issue with `Closes #<number>`
   - Test plan describing how to verify the change
+  - A "Deployment" section (will be filled in after Vercel deploys)
 
 ## Commands
 
