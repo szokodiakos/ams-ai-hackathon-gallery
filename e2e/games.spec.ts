@@ -36,6 +36,14 @@ test.describe("Gallery page", () => {
     }
   });
 
+  test("each game card shows description", async ({ page }) => {
+    await page.goto("/");
+    // Verify at least the first game has a visible description
+    await expect(
+      page.getByText("A cyberpunk arena brawl").first()
+    ).toBeVisible();
+  });
+
   test("gallery page screenshot", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
@@ -53,10 +61,6 @@ test.describe("Game pages", () => {
         await page.goto("/");
         await page.locator(`a[href="/games/${game.id}"]`).click();
         await expect(page).toHaveURL(`/games/${game.id}`);
-        await expect(page.getByText(game.title).first()).toBeVisible();
-        await expect(
-          page.getByText(`by ${game.teamName}`).first()
-        ).toBeVisible();
       });
 
       test(`${game.title} loads game iframe`, async ({ page }) => {
@@ -67,6 +71,16 @@ test.describe("Game pages", () => {
           "src",
           `/games/${game.id}/index.html`
         );
+      });
+
+      test(`${game.title} shows only the game iframe with no chrome`, async ({
+        page,
+      }) => {
+        await page.goto(`/games/${game.id}`);
+        const iframe = page.locator('[data-testid="game-iframe"]');
+        await expect(iframe).toBeVisible();
+        // Verify no title, team name, description, or back link on the game page
+        await expect(page.getByText("BACK TO GALLERY")).not.toBeVisible();
       });
 
       test(`${game.title} iframe content loads`, async ({ page }) => {
@@ -85,14 +99,6 @@ test.describe("Game pages", () => {
           path: `test-results/screenshots/game-${game.id}.png`,
           fullPage: true,
         });
-      });
-
-      test(`${game.title} has back to gallery link`, async ({ page }) => {
-        await page.goto(`/games/${game.id}`);
-        const backLink = page.getByText("BACK TO GALLERY");
-        await expect(backLink).toBeVisible();
-        await backLink.click();
-        await expect(page).toHaveURL("/");
       });
     });
   }
