@@ -97,7 +97,7 @@ Follow the workflow described in CLAUDE.md:
 2. If requirements are unclear, post clarifying questions as a comment using: gh issue comment ${number} --repo ${REPO} --body "your questions here"
 3. If requirements ARE clear enough, create a spec with /opsx:propose, implement with /opsx:apply, and open a PR
 4. Always link the PR to this issue with "Closes #${number}"
-5. When asking clarifying questions, tell the user to reply with @claude so the watcher picks it up
+5. Remember to include <!-- claude-watcher --> at the end of every comment you post
 EOF
 )" "$log_file"
 }
@@ -209,11 +209,11 @@ main() {
       mark_processed "$event_id"
     done
 
-    # ── 2. Check for issue comments with @claude ─────────────────────────
+    # ── 2. Check for new issue comments ────────────────────────────────
     local comments
     comments=$(gh api "repos/${REPO}/issues/comments?since=${since}&per_page=50" 2>/dev/null || echo "[]")
 
-    echo "$comments" | jq -c '.[] | select(.body | test("@claude"; "i"))' 2>/dev/null | while read -r comment; do
+    echo "$comments" | jq -c '.[]' 2>/dev/null | while read -r comment; do
       local comment_id comment_body comment_author issue_url issue_number event_id
       comment_id=$(echo "$comment" | jq -r '.id')
       event_id="comment-${comment_id}"
@@ -222,14 +222,14 @@ main() {
         continue
       fi
 
-      # Skip comments from bots or from claude itself
-      comment_author=$(echo "$comment" | jq -r '.user.login')
-      if [[ "$comment_author" == *"bot"* ]] || [[ "$comment_author" == *"claude"* ]]; then
+      # Skip comments posted by Claude (identified by hidden marker)
+      comment_body=$(echo "$comment" | jq -r '.body')
+      if echo "$comment_body" | grep -q '<!-- claude-watcher -->'; then
         mark_processed "$event_id"
         continue
       fi
 
-      comment_body=$(echo "$comment" | jq -r '.body')
+      comment_author=$(echo "$comment" | jq -r '.user.login')
       issue_url=$(echo "$comment" | jq -r '.issue_url')
       issue_number=$(echo "$issue_url" | grep -oE '[0-9]+$')
 
@@ -247,11 +247,11 @@ main() {
       mark_processed "$event_id"
     done
 
-    # ── 3. Check for PR review comments with @claude ─────────────────────
+    # ── 3. Check for new PR review comments ─────────────────────────────
     local pr_comments
     pr_comments=$(gh api "repos/${REPO}/pulls/comments?since=${since}&per_page=50" 2>/dev/null || echo "[]")
 
-    echo "$pr_comments" | jq -c '.[] | select(.body | test("@claude"; "i"))' 2>/dev/null | while read -r comment; do
+    echo "$pr_comments" | jq -c '.[]' 2>/dev/null | while read -r comment; do
       local comment_id comment_body comment_author diff_hunk path pr_url pr_number event_id
       comment_id=$(echo "$comment" | jq -r '.id')
       event_id="pr-review-${comment_id}"
@@ -260,13 +260,14 @@ main() {
         continue
       fi
 
-      comment_author=$(echo "$comment" | jq -r '.user.login')
-      if [[ "$comment_author" == *"bot"* ]] || [[ "$comment_author" == *"claude"* ]]; then
+      # Skip comments posted by Claude (identified by hidden marker)
+      comment_body=$(echo "$comment" | jq -r '.body')
+      if echo "$comment_body" | grep -q '<!-- claude-watcher -->'; then
         mark_processed "$event_id"
         continue
       fi
 
-      comment_body=$(echo "$comment" | jq -r '.body')
+      comment_author=$(echo "$comment" | jq -r '.user.login')
       diff_hunk=$(echo "$comment" | jq -r '.diff_hunk // ""')
       path=$(echo "$comment" | jq -r '.path // ""')
       pr_url=$(echo "$comment" | jq -r '.pull_request_url')
