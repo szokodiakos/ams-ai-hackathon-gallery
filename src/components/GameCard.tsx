@@ -5,32 +5,61 @@ export default function GameCard({ game }: { game: Game }) {
   return (
     <Link
       href={`/games/${game.id}`}
-      className="group block overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
+      className="card-glow group block overflow-hidden rounded-lg border-2 transition-all duration-300 hover:scale-[1.02]"
+      style={{
+        backgroundColor: "var(--color-card)",
+        borderColor: "var(--color-card-border)",
+      }}
     >
-      <div className="relative aspect-video w-full bg-gray-100">
+      <div
+        className="relative aspect-video w-full"
+        style={{ backgroundColor: "var(--color-bg-darker)" }}
+      >
         {game.comingSoon ? (
-          <div className="flex h-full items-center justify-center bg-gray-50">
-            <span className="text-4xl text-gray-300">🎮</span>
+          <div className="flex h-full items-center justify-center">
+            <div className="text-center">
+              <p
+                className="font-pixel text-2xl"
+                style={{ color: "var(--color-accent1)", opacity: 0.3 }}
+              >
+                ?
+              </p>
+            </div>
           </div>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={game.thumbnail}
             alt={`${game.title} thumbnail`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         )}
         {game.comingSoon && (
-          <span className="absolute right-2 top-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
-            Coming Soon
+          <span
+            className="absolute right-2 top-2 animate-blink rounded border px-2 py-0.5 font-pixel text-[8px]"
+            style={{
+              borderColor: "var(--color-accent2)",
+              color: "var(--color-accent2)",
+              backgroundColor: "var(--color-bg)",
+            }}
+          >
+            COMING SOON
           </span>
         )}
       </div>
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600">
+        <h2
+          className="font-pixel text-xs leading-relaxed"
+          style={{ color: "var(--color-accent1)" }}
+        >
           {game.title}
         </h2>
-        <p className="mt-1 text-sm text-gray-600">{game.description}</p>
+        <p
+          className="mt-2 font-mono text-xs"
+          style={{ color: "var(--color-text-dim)" }}
+        >
+          {game.description}
+        </p>
       </div>
     </Link>
   );
