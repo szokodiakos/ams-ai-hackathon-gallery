@@ -29,11 +29,17 @@ export default async function GamePage({
         &larr; BACK TO GALLERY
       </Link>
       <h1
-        className="text-glow-1 mb-4 font-pixel text-lg"
+        className="text-glow-1 mb-2 font-pixel text-lg"
         style={{ color: "var(--color-accent1)" }}
       >
         {game.title}
       </h1>
+      <p
+        className="mb-4 font-mono text-xs"
+        style={{ color: "var(--color-accent2)" }}
+      >
+        by {game.teamName}
+      </p>
       <p className="mb-6 font-mono text-sm" style={{ color: "var(--color-text-dim)" }}>
         {game.description}
       </p>

@@ -55,6 +55,12 @@ export default function GameCard({ game }: { game: Game }) {
           {game.title}
         </h2>
         <p
+          className="mt-1 font-mono text-[10px]"
+          style={{ color: "var(--color-accent2)" }}
+        >
+          by {game.teamName}
+        </p>
+        <p
           className="mt-2 font-mono text-xs"
           style={{ color: "var(--color-text-dim)" }}
         >
