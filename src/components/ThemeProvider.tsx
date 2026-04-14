@@ -1,22 +1,14 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-import { themes, defaultTheme, type Theme } from "@/lib/themes";
+import { createContext, useContext, useEffect } from "react";
+import { synthwaveTheme, type Theme } from "@/lib/themes";
 
 interface ThemeContextValue {
   theme: Theme;
-  setTheme: (id: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: defaultTheme,
-  setTheme: () => {},
+  theme: synthwaveTheme,
 });
 
 export function useTheme() {
@@ -54,30 +46,12 @@ export default function ThemeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme);
-
-  const setTheme = useCallback((id: string) => {
-    const found = themes.find((t) => t.id === id);
-    if (found) {
-      setThemeState(found);
-      localStorage.setItem("arcade-theme", id);
-    }
-  }, []);
-
   useEffect(() => {
-    const saved = localStorage.getItem("arcade-theme");
-    const found = saved ? themes.find((t) => t.id === saved) : null;
-    const initial = found ?? defaultTheme;
-    setThemeState(initial);
-    applyThemeToDOM(initial);
+    applyThemeToDOM(synthwaveTheme);
   }, []);
-
-  useEffect(() => {
-    applyThemeToDOM(theme);
-  }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme: synthwaveTheme }}>
       {children}
     </ThemeContext.Provider>
   );

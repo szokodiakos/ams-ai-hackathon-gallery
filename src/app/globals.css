@@ -3,20 +3,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0a0a0f;
-  --color-bg-darker: #050508;
-  --color-card: #12121a;
-  --color-card-border: #1a1a2e;
-  --color-card-border-hover: #00fff5;
-  --color-accent1: #00fff5;
-  --color-accent2: #ff00ff;
-  --color-accent3: #b400ff;
-  --color-text: #e0e0e0;
-  --color-text-dim: #888899;
-  --color-header-bg: #08080d;
-  --color-header-border: #00fff540;
-  --color-glow1: #00fff580;
-  --color-glow2: #ff00ff80;
+  --color-bg: #1a0a2e;
+  --color-bg-darker: #0d0519;
+  --color-card: #1e1038;
+  --color-card-border: #2a1a4e;
+  --color-card-border-hover: #ff2d95;
+  --color-accent1: #ff2d95;
+  --color-accent2: #00b4d8;
+  --color-accent3: #ff6b35;
+  --color-text: #e8d5f5;
+  --color-text-dim: #9977aa;
+  --color-header-bg: #150828;
+  --color-header-border: #ff2d9540;
+  --color-glow1: #ff2d9580;
+  --color-glow2: #00b4d880;
   --font-pixel: "Press Start 2P", monospace;
   --font-mono: "Share Tech Mono", monospace;
 }
