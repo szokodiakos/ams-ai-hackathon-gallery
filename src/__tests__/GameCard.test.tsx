@@ -16,8 +16,10 @@ afterEach(cleanup);
 const mockGame: Game = {
   id: "test-game",
   title: "Test Game",
+  teamName: "Test Team",
   description: "A test game description",
   thumbnail: "/games/test-game/thumbnail.png",
+  repoUrl: "https://github.com/test/test-game",
   comingSoon: false,
 };
 

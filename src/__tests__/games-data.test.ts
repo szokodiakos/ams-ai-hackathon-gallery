@@ -10,7 +10,9 @@ describe("games data", () => {
     for (const game of games) {
       expect(game.id).toBeTruthy();
       expect(game.title).toBeTruthy();
+      expect(game.teamName).toBeTruthy();
       expect(game.description).toBeTruthy();
+      expect(game.repoUrl).toBeTruthy();
       expect(typeof game.comingSoon).toBe("boolean");
     }
   });
@@ -21,9 +23,10 @@ describe("games data", () => {
   });
 
   it("getGameById returns the correct game", () => {
-    const game = getGameById("game-1");
+    const game = getGameById("gravity-well");
     expect(game).toBeDefined();
-    expect(game!.id).toBe("game-1");
+    expect(game!.id).toBe("gravity-well");
+    expect(game!.teamName).toBe("Botfathers");
   });
 
   it("getGameById returns undefined for unknown ID", () => {

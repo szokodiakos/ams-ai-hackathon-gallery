@@ -1,0 +1,578 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #0a0a1a;
+  color: #e0e0e0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Game container ───────────────────────────────────────── */
+#game {
+  width: 820px;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform: scale(1.6);
+  transform-origin: center center;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+#round-label {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #f0c040;
+}
+
+.player-health {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.player-label {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.pip {
+  font-size: 22px;
+  color: #e04040;
+  transition: all 0.3s;
+}
+
+.pip.lost {
+  color: #333;
+  opacity: 0.3;
+}
+
+.pip.danger {
+  animation: pip-danger-pulse 0.6s ease-in-out infinite;
+}
+
+.pip.shatter {
+  animation: pip-shatter 0.6s forwards;
+}
+
+/* ── Arena ─────────────────────────────────────────────────── */
+#arena {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+}
+
+/* ── Controls ──────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 160px;
+}
+
+.key-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #161630;
+  border: 1px solid #2a2a50;
+  transition: all 0.15s;
+  font-size: 15px;
+}
+
+.key-row.pressed {
+  background: #2a2a60;
+  border-color: #5050a0;
+  transform: scale(0.96);
+}
+
+.key-row.on-cooldown,
+.controls.on-cooldown .key-row {
+  opacity: 0.4;
+}
+
+.key {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: #222250;
+  border: 1px solid #4040a0;
+  font-weight: 700;
+  font-size: 13px;
+  color: #c0c0ff;
+}
+
+.ingredient {
+  font-size: 14px;
+}
+
+.brew-indicator {
+  height: 4px;
+  border-radius: 2px;
+  background: transparent;
+  transition: all 0.3s;
+  margin-top: 4px;
+}
+
+.brew-indicator.glow-1 {
+  background: rgba(240, 200, 60, 0.4);
+  box-shadow: 0 0 8px rgba(240, 200, 60, 0.3);
+}
+
+.brew-indicator.glow-2 {
+  background: rgba(240, 200, 60, 0.8);
+  box-shadow: 0 0 16px rgba(240, 200, 60, 0.6);
+}
+
+/* ── Centre ────────────────────────────────────────────────── */
+#centre {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 20px;
+  max-width: 360px;
+}
+
+/* ── Direction container (reserved for future use) ────────── */
+#direction-container {
+  display: none;
+}
+
+
+/* ── Cauldron ──────────────────────────────────────────────── */
+#cauldron {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1a1040 0%, #0d0820 80%);
+  border: 2px solid #3030a0;
+  transition: all 0.3s;
+}
+
+#cauldron.hot {
+  border-color: #e04040;
+  box-shadow: 0 0 20px rgba(224, 64, 64, 0.4);
+}
+
+#cauldron.critical {
+  border-color: #ff4040;
+  box-shadow: 0 0 30px rgba(255, 64, 64, 0.6);
+  animation: shake 0.1s infinite;
+}
+
+#cauldron-emoji {
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s;
+}
+
+#cauldron-emoji.cauldron-state-1 {
+  background-image: url(assets/character_animation-1.webp);
+}
+#cauldron-emoji.cauldron-state-2 {
+  background-image: url(assets/character_animation-2.webp);
+}
+#cauldron-emoji.cauldron-state-3 {
+  background-image: url(assets/character_animation-3.webp);
+}
+#cauldron-emoji.cauldron-state-4 {
+  background-image: url(assets/character_animation-4.webp);
+}
+
+#cauldron-arrow {
+  font-size: 28px;
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#cauldron-arrow.arrow-active {
+  opacity: 0.8;
+}
+
+#cauldron-arrow.arrow-p1 {
+  left: -36px;
+  color: #e04040;
+}
+
+#cauldron-arrow.arrow-p2 {
+  right: -36px;
+  color: #4080e0;
+}
+
+#cauldron-arrow.arrow-neutral {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #666;
+  font-size: 22px;
+}
+
+#reaction-label {
+  position: absolute;
+  bottom: -8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f0c040;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+#reaction-label.visible {
+  opacity: 1;
+  animation: float-up 1s forwards;
+}
+
+/* ── Pressure bar ──────────────────────────────────────────── */
+#pressure-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pressure-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #666;
+}
+
+#pressure-bar {
+  width: 100%;
+  height: 14px;
+  border-radius: 7px;
+  background: #1a1a3a;
+  border: 1px solid #3a3a5a;
+  overflow: hidden;
+}
+
+#pressure-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #40a040, #e0e040, #e04040);
+  transition: width 0.15s ease-out;
+}
+
+/* ── Hint banner ──────────────────────────────────────────── */
+#hint-banner {
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f0c040;
+  background: rgba(240, 192, 64, 0.08);
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  border-radius: 6px;
+  margin: 0 auto;
+  transition: opacity 0.3s;
+}
+
+#hint-banner.hidden {
+  display: none;
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+#footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* ── Overlay ───────────────────────────────────────────────── */
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(10, 10, 26, 0.92);
+  z-index: 10;
+  transition: opacity 0.3s;
+}
+
+#overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#overlay-text {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #f0c040;
+  text-shadow: 0 0 20px rgba(240, 192, 64, 0.6);
+}
+
+#overlay-sub {
+  font-size: 18px;
+  color: #888;
+  margin-top: 8px;
+}
+
+.onboarding {
+  text-align: center;
+  max-width: 520px;
+}
+
+.onboarding-concept {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.onboarding-cols {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 16px;
+}
+
+.onboarding-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  font-size: 13px;
+  color: #ccc;
+}
+
+.onboarding-col strong {
+  font-size: 14px;
+  color: #f0c040;
+  margin-bottom: 4px;
+}
+
+.onboarding-ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  font-size: 13px;
+  color: #ccc;
+  margin: 0 auto 16px;
+  max-width: 340px;
+}
+
+.onboarding-ingredients strong {
+  color: #f0c040;
+}
+
+.onboarding-tip {
+  color: #f0c040 !important;
+  font-style: italic;
+}
+
+.onboarding-hint {
+  font-size: 12px !important;
+  color: #777 !important;
+}
+
+.onboarding-start {
+  font-size: 16px;
+  color: #f0c040;
+  letter-spacing: 1px;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.onboarding-available-title {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.onboarding-keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.kb-row {
+  display: flex;
+  gap: 4px;
+}
+
+.kb-row-offset-1 { margin-left: 14px; }
+.kb-row-offset-2 { margin-left: 28px; }
+.kb-row-offset-3 { margin-left: 42px; }
+
+.onboarding-key-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: #222250;
+  border: 1px solid #4040a0;
+  font-weight: 700;
+  font-size: 12px;
+  color: #c0c0ff;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── Floating delta labels ─────────────────────────────────── */
+.floating-delta {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: delta-rise 0.8s ease-out forwards;
+  z-index: 5;
+}
+
+.p1-delta {
+  left: 20%;
+  top: 40%;
+  color: #e08080;
+}
+
+.p2-delta {
+  right: 20%;
+  top: 40%;
+  color: #8080e0;
+}
+
+@keyframes delta-rise {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  75% {
+    transform: translate(-1px, 2px);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pip-danger-pulse {
+  0%,
+  100% {
+    color: #e04040;
+    transform: scale(1);
+  }
+  50% {
+    color: #ff6060;
+    transform: scale(1.2);
+    text-shadow: 0 0 8px rgba(255, 64, 64, 0.6);
+  }
+}
+
+@keyframes pip-shatter {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+    color: #333;
+  }
+}
+
+@keyframes explode-flash {
+  0% {
+    background: rgba(255, 80, 40, 0.6);
+  }
+  100% {
+    background: rgba(10, 10, 26, 0);
+  }
+}
+
+#game.exploding {
+  animation: explode-flash 0.5s forwards;
+}
