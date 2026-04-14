@@ -12,6 +12,7 @@
     "test:run": "vitest run",
     "test:e2e": "playwright test",
     "test:e2e:update-snapshots": "playwright test --update-snapshots",
+    "generate-thumbnails": "npx tsx scripts/generate-thumbnails.ts",
     "opsx:init": "openspec init --tools claude --profile core --force"
   },
   "dependencies": {
