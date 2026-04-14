@@ -1,17 +1,20 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import GameCard from "@/components/GameCard";
 import type { Game } from "@/data/games";
 
-vi.mock("next/link", () => ({
-  default: ({ href, children, ...props }: { href: string; children: React.ReactNode }) => (
-    <a href={href} {...props}>
-      {children}
-    </a>
-  ),
+const mockPush = vi.fn();
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
 }));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  mockPush.mockClear();
+});
 
 const mockGame: Game = {
   id: "test-game",
@@ -41,10 +44,11 @@ describe("GameCard", () => {
     expect(screen.getByText("A test game description")).toBeInTheDocument();
   });
 
-  it("links to the game page", () => {
+  it("navigates to the game page on click", () => {
     render(<GameCard game={mockGame} />);
-    const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "/games/test-game");
+    const card = screen.getByRole("link", { name: /Test Game/i });
+    fireEvent.click(card);
+    expect(mockPush).toHaveBeenCalledWith("/games/test-game");
   });
 
   it("shows Coming Soon badge when game is coming soon", () => {
@@ -61,5 +65,33 @@ describe("GameCard", () => {
     render(<GameCard game={mockGame} />);
     const img = screen.getByAltText("Test Game thumbnail");
     expect(img).toHaveAttribute("src", "/games/test-game/thumbnail.png");
+  });
+
+  it("renders a SOURCE link pointing to the repo URL", () => {
+    render(<GameCard game={mockGame} />);
+    const sourceLink = screen.getByText("SOURCE");
+    expect(sourceLink).toBeInTheDocument();
+    expect(sourceLink.closest("a")).toHaveAttribute(
+      "href",
+      "https://github.com/test/test-game"
+    );
+    expect(sourceLink.closest("a")).toHaveAttribute("target", "_blank");
+    expect(sourceLink.closest("a")).toHaveAttribute(
+      "rel",
+      "noopener noreferrer"
+    );
+  });
+
+  it("does not navigate to game page when clicking repo link", () => {
+    render(<GameCard game={mockGame} />);
+    const sourceLink = screen.getByText("SOURCE").closest("a")!;
+    fireEvent.click(sourceLink);
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it("shows repo link on coming-soon game with repoUrl", () => {
+    render(<GameCard game={comingSoonGame} />);
+    const sourceLink = screen.getByText("SOURCE");
+    expect(sourceLink).toBeInTheDocument();
   });
 });
