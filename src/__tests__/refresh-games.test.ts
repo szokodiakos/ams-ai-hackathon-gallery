@@ -26,7 +26,7 @@ const SHA_FILE = join(TEST_DIR, "game-shas.json");
 function createTestRepo(name: string, files: Record<string, string>): string {
   const repoDir = join(TEST_DIR, "source-repos", name);
   mkdirSync(repoDir, { recursive: true });
-  execSync("git init", { cwd: repoDir, stdio: "pipe" });
+  execSync("git init -b main", { cwd: repoDir, stdio: "pipe" });
   execSync('git config user.email "test@test.com"', {
     cwd: repoDir,
     stdio: "pipe",
