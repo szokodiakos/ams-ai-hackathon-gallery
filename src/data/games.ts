@@ -19,6 +19,7 @@ export const games: Game[] = [
     thumbnail: "/games/gravity-well/thumbnail.png",
     repoUrl: "https://github.com/reaktor/botfathers",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "particle-panic",
@@ -40,6 +41,7 @@ export const games: Game[] = [
     thumbnail: "/games/moonshot/thumbnail.png",
     repoUrl: "https://github.com/reaktor/TeamArtemis-GenAIHackathon",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "boat-race",
@@ -50,6 +52,7 @@ export const games: Game[] = [
     thumbnail: "/games/boat-race/thumbnail.png",
     repoUrl: "https://github.com/H1D/f1-race",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "colony-clash",
@@ -60,6 +63,7 @@ export const games: Game[] = [
     thumbnail: "/games/colony-clash/thumbnail.png",
     repoUrl: "https://github.com/bmachimbira/colony-wars",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "grachten-hopper",
@@ -70,6 +74,7 @@ export const games: Game[] = [
     thumbnail: "/games/grachten-hopper/thumbnail.png",
     repoUrl: "https://github.com/reaktor/ai-hackathon-grachtenhopper",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "arcane-akash",
@@ -80,6 +85,7 @@ export const games: Game[] = [
     thumbnail: "/games/arcane-akash/thumbnail.png",
     repoUrl: "https://github.com/bsander/LIT-intelligence",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "eat-that",
