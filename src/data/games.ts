@@ -6,6 +6,7 @@ export interface Game {
   thumbnail: string;
   repoUrl: string;
   comingSoon: boolean;
+  customThumbnail?: boolean;
 }
 
 export const games: Game[] = [
@@ -28,6 +29,7 @@ export const games: Game[] = [
     thumbnail: "/games/particle-panic/thumbnail.png",
     repoUrl: "https://github.com/reaktor/particle_panic",
     comingSoon: false,
+    customThumbnail: true,
   },
   {
     id: "moonshot",
@@ -88,6 +90,7 @@ export const games: Game[] = [
     thumbnail: "/games/eat-that/thumbnail.png",
     repoUrl: "https://github.com/reaktor/ams-hackathon-eat-that",
     comingSoon: false,
+    customThumbnail: true,
   },
 ];
 

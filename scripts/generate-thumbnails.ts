@@ -57,6 +57,11 @@ async function main() {
   const context = await browser.newContext({ viewport: VIEWPORT });
 
   for (const game of games) {
+    if (game.customThumbnail) {
+      console.log(`Skipping ${game.id} (custom thumbnail)`);
+      continue;
+    }
+
     const url = `http://localhost:${port}/games/${game.id}/`;
     const outPath = join(PUBLIC_DIR, "games", game.id, "thumbnail.png");
 
