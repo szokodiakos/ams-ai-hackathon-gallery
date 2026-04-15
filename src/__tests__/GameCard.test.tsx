@@ -33,6 +33,13 @@ const comingSoonGame: Game = {
   comingSoon: true,
 };
 
+const customThumbnailGame: Game = {
+  ...mockGame,
+  id: "custom-thumb-game",
+  title: "Custom Thumb Game",
+  customThumbnail: true,
+};
+
 describe("GameCard", () => {
   it("renders the game title", () => {
     render(<GameCard game={mockGame} />);
@@ -93,5 +100,12 @@ describe("GameCard", () => {
     render(<GameCard game={comingSoonGame} />);
     const sourceLink = screen.getByText("SOURCE");
     expect(sourceLink).toBeInTheDocument();
+  });
+
+  it("renders correctly for a game with customThumbnail flag", () => {
+    render(<GameCard game={customThumbnailGame} />);
+    expect(screen.getByText("Custom Thumb Game")).toBeInTheDocument();
+    const img = screen.getByAltText("Custom Thumb Game thumbnail");
+    expect(img).toBeInTheDocument();
   });
 });
