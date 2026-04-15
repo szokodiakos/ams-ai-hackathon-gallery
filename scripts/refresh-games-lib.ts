@@ -7,6 +7,7 @@ import {
   rmSync,
   cpSync,
   readdirSync,
+  statSync,
 } from "fs";
 import { join } from "path";
 
@@ -137,6 +138,127 @@ function restoreThumbnail(
   }
 }
 
+// Directories that should never be copied as extra assets from the repo root
+const BUILD_ARTIFACT_DIRS = new Set([
+  "dist",
+  "node_modules",
+  ".git",
+  ".github",
+  ".claude",
+  "src",
+  "docs",
+  "test",
+  "tests",
+  "e2e",
+  "__tests__",
+]);
+
+/**
+ * Copy asset directories from the repo root that aren't in dist/ but are
+ * referenced by the game's JS. Some games (e.g. particle-panic) keep static
+ * assets at the repo root outside of Vite's public/ directory.
+ * If a directory exists in both dist/ and the repo root (e.g. assets/),
+ * the contents are merged without overwriting dist files.
+ */
+export function copyExtraAssets(repoDir: string, destDir: string): void {
+  const repoEntries = readdirSync(repoDir);
+
+  for (const entry of repoEntries) {
+    if (shouldExcludeFromCopy(entry)) continue;
+    if (BUILD_ARTIFACT_DIRS.has(entry)) continue;
+
+    const fullPath = join(repoDir, entry);
+    if (!statSync(fullPath).isDirectory()) continue;
+
+    // Check if any JS file in dest references this directory
+    const jsFiles = findJsFiles(destDir);
+    const isReferenced = jsFiles.some((jsFile) => {
+      const content = readFileSync(jsFile, "utf-8");
+      return (
+        content.includes(`"/${entry}/`) ||
+        content.includes(`'/${entry}/`) ||
+        content.includes(`\`/${entry}/`)
+      );
+    });
+
+    if (isReferenced) {
+      const destPath = join(destDir, entry);
+      if (existsSync(destPath)) {
+        // Merge: copy subdirectories/files that don't already exist in dest
+        const repoSubEntries = readdirSync(fullPath);
+        for (const sub of repoSubEntries) {
+          const destSubPath = join(destPath, sub);
+          if (!existsSync(destSubPath)) {
+            console.log(`  Copying extra asset: ${entry}/${sub}`);
+            cpSync(join(fullPath, sub), destSubPath, { recursive: true });
+          }
+        }
+      } else {
+        console.log(`  Copying extra asset directory: ${entry}/`);
+        cpSync(fullPath, destPath, { recursive: true });
+      }
+    }
+  }
+}
+
+function findJsFiles(dir: string): string[] {
+  const results: string[] = [];
+  const entries = readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findJsFiles(fullPath));
+    } else if (entry.name.endsWith(".js")) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+/**
+ * Rewrite absolute asset paths in JS files to relative paths.
+ * Games built with Vite use absolute paths (e.g. "/bg.png") which break
+ * when served under /games/<id>/. This converts them to relative paths
+ * (e.g. "./bg.png") so they resolve correctly.
+ */
+export function rewriteAssetPaths(destDir: string): void {
+  const topEntries = readdirSync(destDir);
+  const jsFiles = findJsFiles(destDir);
+
+  if (jsFiles.length === 0) return;
+
+  // Build a list of top-level files and directories to match against
+  const assetNames = topEntries.filter(
+    (e) => e !== "index.html" && !e.startsWith(".")
+  );
+
+  for (const jsFile of jsFiles) {
+    let content = readFileSync(jsFile, "utf-8");
+    let modified = false;
+
+    for (const name of assetNames) {
+      // Replace "/name" with "./name" in string literals (both quote styles)
+      // Matches: "/assets/..." or "/bg.png" etc.
+      const patterns = [
+        { search: `"/${name}`, replace: `"./${name}` },
+        { search: `'/${name}`, replace: `'./${name}` },
+        { search: `\`/${name}`, replace: `\`./${name}` },
+      ];
+      for (const { search, replace } of patterns) {
+        if (content.includes(search)) {
+          content = content.split(search).join(replace);
+          modified = true;
+        }
+      }
+    }
+
+    if (modified) {
+      writeFileSync(jsFile, content);
+      console.log(`  Rewrote asset paths in: ${jsFile.replace(destDir + "/", "")}`);
+    }
+  }
+}
+
 export function copyBuiltGame(repoDir: string, destDir: string): void {
   const distDir = join(repoDir, "dist");
   if (!existsSync(distDir)) {
@@ -148,6 +270,12 @@ export function copyBuiltGame(repoDir: string, destDir: string): void {
   rmSync(destDir, { recursive: true, force: true });
   mkdirSync(destDir, { recursive: true });
   cpSync(distDir, destDir, { recursive: true });
+
+  // Copy asset directories from repo root that aren't in dist but are referenced
+  copyExtraAssets(repoDir, destDir);
+
+  // Rewrite absolute paths to relative so games work under /games/<id>/
+  rewriteAssetPaths(destDir);
 
   restoreThumbnail(destDir, thumbnailBuffer);
 }

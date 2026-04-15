@@ -1,0 +1,243 @@
+{
+  "style_prefix": "Modern pixel art game sprite, chibi proportions with big head and compact body, clean dark outlines, limited but punchy color palette, subtle cel shading, charming and expressive, solid pure white background, no grid lines, no graph paper, no checkered pattern, no scenery, character only, inspired by modern indie pixel art and motion graphics pixel characters",
+  "assets": [
+    {
+      "name": "player-1",
+      "category": "characters",
+      "prompt": "A red-themed chibi jungle explorer character, front-facing idle pose, big expressive eyes, messy bright red hair with a green headband, wearing a small red vest with a bold letter R logo on the chest and boots, carrying a satchel, confident smirk, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-2",
+      "category": "characters",
+      "prompt": "A blue-themed chibi jungle explorer character, front-facing idle pose, big expressive eyes, short spiky hair, wearing a small vest with a bold letter R logo on the chest and boots, carrying a satchel, cheerful grin, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-3",
+      "category": "characters",
+      "prompt": "A green-themed female chibi jungle explorer character, front-facing idle pose, big expressive eyes, green ponytail hair, wearing a small vest with a bold letter R logo on the chest and boots, carrying a satchel, determined look, treasure hunter adventurer woman",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-4",
+      "category": "characters",
+      "prompt": "An orange-themed chibi jungle explorer character, front-facing idle pose, big expressive eyes, curly bright orange hair with goggles on forehead, wearing a small vest with a bold letter R logo on the chest and boots, carrying a satchel, excited expression, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-5",
+      "category": "characters",
+      "prompt": "A pink and magenta-themed chibi jungle explorer character, front-facing idle pose, big expressive eyes, twin buns hair, wearing a small vest with a bold letter R logo on the chest and boots, carrying a satchel, playful wink, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-1-jump",
+      "category": "characters",
+      "prompt": "A red-themed chibi jungle explorer character, side view facing right, athletic jumping pose leaping forward with one knee up and arms back for momentum, focused determined expression, exactly the same messy bright red hair with a green headband as idle pose, exactly the same small red vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-1-shoot",
+      "category": "characters",
+      "prompt": "A red-themed chibi jungle explorer character, side view facing right, standing battle stance ready to fight, arms bent at sides in a combat ready position, fists clenched, completely empty hands holding absolutely nothing, no gun no weapon no object, focused determined expression, exactly the same messy bright red hair with a green headband as idle pose, exactly the same small red vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-1-walk",
+      "category": "characters",
+      "prompt": "A red-themed chibi jungle explorer character, side view facing right, walking pose mid-stride with one leg forward and one leg back, arms swinging naturally, determined look, exactly the same messy bright red hair with a green headband as idle pose, exactly the same small red vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-2-jump",
+      "category": "characters",
+      "prompt": "A blue-themed chibi jungle explorer character, side view facing right, athletic jumping pose leaping forward with one knee up and arms back for momentum, focused determined expression, exactly the same short spiky blue hair as idle pose, exactly the same small blue vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-2-shoot",
+      "category": "characters",
+      "prompt": "A blue-themed chibi jungle explorer character, side view facing right, standing battle stance ready to fight, arms bent at sides in a combat ready position, fists clenched, completely empty hands holding absolutely nothing, no gun no weapon no object, focused determined expression, exactly the same short spiky blue hair as idle pose, exactly the same small blue vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-2-walk",
+      "category": "characters",
+      "prompt": "A blue-themed chibi jungle explorer character, side view facing right, walking pose mid-stride with one leg forward and one leg back, arms swinging naturally, determined look, exactly the same short spiky blue hair as idle pose, exactly the same small blue vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-3-jump",
+      "category": "characters",
+      "prompt": "A green-themed chibi jungle explorer character, side view facing right, athletic jumping pose leaping forward with one knee up and arms back for momentum, focused determined expression, exactly the same green ponytail hair as idle pose, female woman character, exactly the same small green vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-3-shoot",
+      "category": "characters",
+      "prompt": "A green-themed chibi jungle explorer character, side view facing right, standing battle stance ready to fight, arms bent at sides in a combat ready position, fists clenched, completely empty hands holding absolutely nothing, no gun no weapon no object, focused determined expression, exactly the same green ponytail hair as idle pose, female woman character, exactly the same small green vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-3-walk",
+      "category": "characters",
+      "prompt": "A green-themed chibi jungle explorer character, side view facing right, walking pose mid-stride with one leg forward and one leg back, arms swinging naturally, determined look, exactly the same green ponytail hair as idle pose, female woman character, exactly the same small green vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-4-jump",
+      "category": "characters",
+      "prompt": "An orange-themed chibi jungle explorer character, side view facing right, athletic jumping pose leaping forward with one knee up and arms back for momentum, focused determined expression, exactly the same curly bright orange hair with goggles on forehead as idle pose, exactly the same small orange vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-4-shoot",
+      "category": "characters",
+      "prompt": "An orange-themed chibi jungle explorer character, side view facing right, standing battle stance ready to fight, arms bent at sides in a combat ready position, fists clenched, completely empty hands holding absolutely nothing, no gun no weapon no object, focused determined expression, exactly the same curly bright orange hair with goggles on forehead as idle pose, exactly the same small orange vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-4-walk",
+      "category": "characters",
+      "prompt": "An orange-themed chibi jungle explorer character, side view facing right, walking pose mid-stride with one leg forward and one leg back, arms swinging naturally, determined look, exactly the same curly bright orange hair with goggles on forehead as idle pose, exactly the same small orange vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-5-jump",
+      "category": "characters",
+      "prompt": "A pink and magenta-themed chibi jungle explorer character, side view facing right, athletic jumping pose leaping forward with one knee up and arms back for momentum, focused determined expression, exactly the same twin buns hair as idle pose, exactly the same small pink vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-5-shoot",
+      "category": "characters",
+      "prompt": "A pink and magenta-themed chibi jungle explorer character, side view facing right, standing battle stance ready to fight, arms bent at sides in a combat ready position, fists clenched, completely empty hands holding absolutely nothing, no gun no weapon no object, focused determined expression, exactly the same twin buns hair as idle pose, exactly the same small pink vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "player-5-walk",
+      "category": "characters",
+      "prompt": "A pink and magenta-themed chibi jungle explorer character, side view facing right, walking pose mid-stride with one leg forward and one leg back, arms swinging naturally, determined look, exactly the same twin buns hair as idle pose, exactly the same small pink vest with a bold letter R logo on the chest, same boots, same satchel, treasure hunter adventurer",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "gem-common",
+      "category": "gems",
+      "prompt": "A glowing green gem, diamond shape, cute and sparkly, chunky facets, bright green with teal highlights, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "gem-rare",
+      "category": "gems",
+      "prompt": "A glowing blue gem, diamond shape, cute and sparkly, chunky facets, bright blue with cyan highlights, slightly larger sparkle effect, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "gem-epic",
+      "category": "gems",
+      "prompt": "A glowing golden gem, diamond shape, cute and sparkly, chunky facets, bright gold with warm yellow highlights, radiant glow effect, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "powerup-ammo",
+      "category": "powerups",
+      "prompt": "A cute wooden ammo crate with a flame symbol on the front, chunky proportions, warm brown wood with orange flame icon, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "powerup-waterbomb",
+      "category": "powerups",
+      "prompt": "A cute round blue water bomb with a water droplet symbol, chunky proportions, bright blue with a small fuse on top, glowing slightly, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "platform-tile",
+      "category": "environment",
+      "prompt": "A dark volcanic rock platform block, chunky and solid, cracks with warm orange glow inside, mossy green patches on top, single object centered",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "background",
+      "category": "environment",
+      "prompt": "BACKGROUND SCENE ONLY, NOT A CHARACTER, NOT AN OBJECT. Highly detailed pixel art background of the inside of a volcano crater, tall vertical composition, open sky at the top with volcanic smoke and orange glow, dark rocky volcano walls on left and right with cracks showing glowing magma underneath, charred rocks and volcanic stone textures, warm dramatic lighting from below, deep reds oranges and dark grays, the very bottom of the image shows a rocky volcanic floor with cracks of glowing lava seeping through, no platforms no characters no creatures no foreground objects, atmospheric and dramatic but colorful, game background for a side-scrolling platformer, high detail",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "name": "background-simple",
+      "category": "environment",
+      "prompt": "BACKGROUND SCENE ONLY, NOT A CHARACTER, NOT AN OBJECT. Pixel art background of the inside of a volcano, simple composition, dark volcanic rock walls fading into the edges, glowing molten lava cracks running through the rock, warm red and orange ambient glow filling the space, heat haze and embers floating, no detailed platforms no characters no creatures, feels like being deep inside a volcano, atmospheric and warm, simpler and less detailed than a hero illustration but still clearly a volcanic interior",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "name": "title-logo",
+      "category": "ui",
+      "prompt": "NOT A CHARACTER. Pixel art game logo, the text PARTICLE PANIC in two lines, bold chunky blocky letters, PARTICLE on top line PANIC on bottom line, fiery orange and yellow gradient colors, dark outlines on each letter, small ember sparks around the text, solid white background, text logo only, no characters no creatures no objects",
+      "width": 512,
+      "height": 256
+    },
+    {
+      "name": "icon-gem",
+      "category": "ui",
+      "prompt": "A small green gem icon, diamond shape, chunky and readable, bright green with dark outline, single object centered, HUD icon style",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "icon-ammo",
+      "category": "ui",
+      "prompt": "A small flame icon, chunky and readable, bright orange fire with dark outline, single object centered, HUD icon style",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "weapon-fireball",
+      "category": "weapons",
+      "prompt": "A chunky handheld fireball launcher weapon, short dark metal barrel, wooden grip, no fire no flames no particles no effects coming out, compact and cute, side view facing right, single object centered, game weapon sprite",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "weapon-lightning",
+      "category": "weapons",
+      "prompt": "A chunky handheld lightning gun weapon, metallic blue barrel, cyan energy coils along the body, no sparks no lightning no electricity no effects coming out, compact and cute, side view facing right, single object centered, game weapon sprite",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "weapon-sandcannon",
+      "category": "weapons",
+      "prompt": "A chunky handheld sand cannon weapon, wide barrel made of stone and wood, sandy brown and tan colors, no sand no particles no effects coming out, compact and cute, flat side view facing right horizontal like a pistol, single object centered, game weapon sprite",
+      "width": 256,
+      "height": 256
+    }
+  ]
+}
