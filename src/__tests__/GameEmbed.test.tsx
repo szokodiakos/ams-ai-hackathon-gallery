@@ -30,4 +30,23 @@ describe("GameEmbed", () => {
     const iframe = container.querySelector("iframe");
     expect(iframe!.getAttribute("sandbox")).toContain("allow-scripts");
   });
+
+  it("focuses the iframe on mount", () => {
+    const { container } = render(<GameEmbed gameId="test-game" />);
+    const iframe = container.querySelector("iframe");
+    expect(iframe).toBe(document.activeElement);
+  });
+
+  it("focuses the iframe on load event", () => {
+    const { container } = render(<GameEmbed gameId="test-game" />);
+    const iframe = container.querySelector("iframe");
+
+    // Blur the iframe first to verify load event re-focuses it
+    iframe!.blur();
+    expect(iframe).not.toBe(document.activeElement);
+
+    // Simulate the iframe load event
+    iframe!.dispatchEvent(new Event("load"));
+    expect(iframe).toBe(document.activeElement);
+  });
 });
