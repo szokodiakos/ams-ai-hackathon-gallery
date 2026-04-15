@@ -18,7 +18,7 @@ const GAMES = [
 test.describe("Gallery page", () => {
   test("displays all 8 game cards", async ({ page }) => {
     await page.goto("/");
-    const cards = page.locator("a[href^='/games/']");
+    const cards = page.locator('[role="link"]');
     await expect(cards).toHaveCount(8);
   });
 
@@ -59,7 +59,7 @@ test.describe("Game pages", () => {
     test.describe(game.title, () => {
       test(`navigates from gallery to ${game.title}`, async ({ page }) => {
         await page.goto("/");
-        await page.locator(`a[href="/games/${game.id}"]`).click();
+        await page.getByRole("link", { name: game.title }).click();
         await expect(page).toHaveURL(`/games/${game.id}`);
       });
 
